@@ -1,0 +1,390 @@
+<div data-ng-include src="'components/common/top-panel.html'"></div>
+<div data-ng-include src="'components/common/left-panel.html'"></div>
+<!-- Content -->
+<div class="contentbar">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="alert alert-danger" ng-show="errors">
+                            <p ng-repeat="error in errors">{{error}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- step 1 -->
+                <div class="step-body" ng-show="step == 1">
+                    <div class="row step-body-heading">
+                        <div class="col-md-12">
+                            <i class="fa fa-cog" aria-hidden="true"></i> Step:1 <strong>General</strong>
+                            <div class="complete-line" style="width: 25%;"></div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="step-1-body">
+                                <form ng-submit="createNewProject()" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-md-offset-1">Name</label>
+                                        <div class="col-md-7">
+                                            <input required="" type="text" ng-model="project.name" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-md-offset-1">Domain</label>
+                                        <div class="col-md-7">
+                                            <input required="" type="url" ng-model="project.domain" class=" form-control" placeholder="Example: http://google.com/">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-md-offset-1">System</label>
+                                        <div class="col-md-7">
+                                            <select required="" class="form-control" ng-model="project.system">
+                                                <option ng-repeat="system in systems" value="{{system.name}}">{{system.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-md-offset-1">
+                                            Language
+                                        </label>
+                                        <div class="col-md-7">
+                                            <select required="" class="form-control" ng-model="project.defaultLang">
+                                                <option ng-repeat="lang in langs" value="{{lang.id}}">{{lang.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="text-right col-md-7 col-md-offset-4">
+                                            <button class="step-btn">
+                                                Step 2
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step: 2 -->
+                <div class="step-body" ng-show="step == 2">
+                    <div class="row step-body-heading">
+                        <div class="col-md-12">
+                            <i class="fa fa-plug" aria-hidden="true"></i> Step:2 <strong>Integration</strong>
+                            <div class="complete-line" style="width: 40%;"></div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div>
+                                <p class="text-muted">Please choose how to integrate with your system: </p>
+                                <br>
+                                <div class="integrations text-center">
+                                    <div class="integrations-item">
+                                        <div ng-click="integrationWay = 'laravelPlug'">
+                                            <div class="integrations-item-icon">
+                                                <img src="img/LaravelLogo.png" alt="">
+                                            </div>
+                                            <p class="integrations-item-name text-muted">Laravel Plugin</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="integration-instruction" ng-show="integrationWay === 'laravelPlug'" id="laravel-plugin">
+                                    <hr>
+                                    <p class="text-muted">Instruction</p>
+                                    <ul class="integration-instruction-steps">
+                                        <li>
+                                            <span class="num">1</span>
+                                            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                            <span class="text-muted">
+												<a href="{{laravelPluginUrl}}">Download</a> "Translation" pluging
+											</span>
+                                        </li>
+                                        <li>
+                                            <span class="num">2</span>
+                                            <i class="fa fa-files-o" aria-hidden="true"></i>
+                                            <span class="text-muted">
+												Place "Translation" and its files in the "app" directory
+											</span>
+                                        </li>
+                                        <li>
+                                            <span class="num">3</span>
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            <span class="text-muted" style="max-width: 80%;">
+											In <code>"config/app.php"</code> at 'providers' Array "[ here ]", add <code>"App\Translation\TranslationServiceProvider::class,"</code> before the end "]" of the Array
+ 											</span>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                    <div class="text-right">
+                                        <button class="btn btn-success btn-rounded" ng-click="integrateProject()">
+                                            Start integration
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="integration-bar" style="display: none;">
+                                    <hr>
+                                    <p class="text-muted"> Integration prosses:</p>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="10" aria-valuemax="100" style="width:100%">
+                                            <span>Please, wait..</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step: 3 -->
+                <div class="step-body" ng-show="step == 3">
+                    <div class="row step-body-heading">
+                        <div class="col-md-12">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i> Step:3 <strong>Payment</strong>
+                            <div class="complete-line" style="width: 60%;"></div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                    	<div class="col-md-3 col-md-offset-1">
+                    		<div class="circle-diagram">
+                    			<div>{{project.words_count}}</div>
+                    		</div>
+                    	</div>
+                        <div class="col-md-6">
+                        	<br>
+                            <p class="text-muted">We have successfully integrated the system.</p>
+                            <p class="text-muted">We found <strong> words</strong>{{project.words_count}}</p>
+                            <br>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                    	<div class="col-md-6 col-md-offset-3">
+                    		<ul class="list-inline vcenter text-center">
+                    			<li class="text-muted">Annual Pay <strong>${{project.totalSum}}</strong></li>
+                    			<li>
+                    				<button ng-click="pay()" class="btn btn-success btn-rounded">Pay</button>
+                    			</li>
+                    		</ul>
+                    	</div>
+                    </div>
+                </div>
+                <!-- Step: 4 -->
+                <div class="step-body" ng-show="step == 4">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1" ng-hide="project.langs.length > 0">
+                            <p class="text-muted text-center">No languages selected.</p>
+                        </div>
+                    </div>
+                    <div class="single-lang" ng-repeat="lang in project.langs">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row vcenter">
+                                            <div class="col-md-2">
+                                                <p class="text-muted">Language</p>
+                                                <strong>{{lang.name}}</strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p class="text-muted">Translator</p>
+                                                <strong ng-show="lang.translator">{{lang.translator.name}}</strong>
+                                                <br>
+                                                <a href="#!/projects/create" ng-click="searchPerson(lang.id)">Change</a>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <p class="text-muted">Moderator</p>
+                                                <strong ng-show="lang.moderator">{{lang.moderator.name}}</strong>
+                                                <br>
+                                                <a href="#!/projects/create" ng-click="searchPerson(lang.id)">Change</a>
+                                            </div>
+                                            <div class="col-md-2" ng-show="lang.translator.rate">
+                                                <p class="text-muted">Rate <small>(translator)</small></p>
+                                                <strong ng-show="lang.translator.rate">${{lang.translator.rate}}/word</strong>
+                                            </div>
+                                            <div class="col-md-2" ng-show="lang.moderator.rate">
+                                                <p class="text-muted">Rate <small>(moderator)</small></p>
+                                                <strong ng-show="lang.moderator.rate">${{lang.moderator.rate}}/word</strong>
+                                            </div>
+                                            <div class="col-md-2" ng-show="lang.moderator.rate && lang.translator.rate && project.words_count ">
+                                                <p class="text-muted">Total</p>
+                                                <strong class="text-success">${{lang.moderator.rate*project.words_count+lang.translator.rate*project.words_count}}
+												</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <ul class="list-inline text-right">
+                                    <li><a href="#!/projects/create" ng-click="deleteLang($index)" class="btn btn-danger">Remove</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center">
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#new-lang-modal">Add language</button>
+                                <button class="btn btn-success" ng-click="saveLanguages()">Complete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Step: 5 -->
+                <div class="step-body" ng-show="step == 5">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <h3 class="text-success">
+				        		You have successfully create a new project!
+				        	</h3>
+                            <ul class="list-inline">
+                                <li><a href="#!/projects/preference/?project_id={{project.id}}" class="btn btn-primary">Preference</a></li>
+                                <li><a href="#!/projects" class="btn btn-primary">Projects list</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="laravel-plugin-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Laravel plugin integration</h4>
+            </div>
+            <div class="modal-body">
+                <h2>Follow instruction</h2>
+                <ul>
+                    <li>1. <a href="{{laravelPluginUrl}}">Download</a> "Translation" pluging</li>
+                    <li>2. Place "Translation" and its files in the "app" directory</li>
+                    <li>3. In <code>"config/app.php"</code> at 'providers' Array "[ here ]", add <code>"App\Translation\TranslationServiceProvider::class," before the end "]"</code> of the Array</li>
+                </ul>
+                <h2>Home &amp; Help pages</h2>
+                <p>Use <code>http://yours-site.com/translation-help</code> for help page.</p>
+                <p>Use <code>http://yours-site.com/translation</code> for home page. To prevent accessing this page for any (guest) user, please uncomment code at "Translation/Controllers/TranslationController.php" in "public function index()", so only authorized users can see it</p>
+                <p>Description</p>
+                Update your Laravel website with new translations from your BackOffice. This plugin is synchronizing your Laravel website text/translations with BackOffice.
+                <br> Following Laravel localization standards, every "view" (php) file contain: static text, variable or tTrans('key'), which can be translated to other languages using Ex.: <span><!--?php tTrans('text/key')?--></span>
+                <br> If site never was localized or was partialy translated, site administrator can include all text (or relative "key" name) in "../views/.." (PHP files) in "tTrans(text/key)" (or other Laravel) function to apply it for sit localization (translations), then from your BackOffice export it to for translations, and after site-text is translated, import it back to your Laravel website
+                <br> If your site already using tTrans('key') style, where "key" coresponding to its php Array (at "/resources/lang/en/.." files) as: ['aboutus' =&gt; 'About Us']
+                <p></p>
+                <p class="alert alert-warning">Note: Your old language files in "./resources/lang" will be exchanged (and copied ex. "lang_2017-04-14_04-58-34") with new ones to your Laravel project</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" ng-click="integrateProject()">Integrate</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="new-lang-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add new lang to project</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">Choose language</label>
+                    <select class="form-control" ng-model="newLang">
+                        <option ng-repeat="lang in langs" value="{{lang.id}}">{{lang.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" ng-click="addLangToProject()">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="search-modal" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Search</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <th width="8%"></th>
+                        <th width="14%">Name</th>
+                        <th width="14%">Rating</th>
+                        <th width="14%">Project completed</th>
+                        <th width="14%">Rate ($)</th>
+                        <th width="14%">Total ($)</th>
+                        <th width="20%"></th>
+                    </thead>
+                    <tbody>
+                        <tr class="vcenter" ng-repeat="user in users">
+                            <td>
+                                <div class="userimage userimage-xs">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="text-muted"><strong>{{user.name}}</strong></p>
+                            </td>
+                            <td>
+                                <p class="text-muted">{{user.rating}}</p>
+                            </td>
+                            <td>
+                                <p class="text-muted">{{user.proejcts_completed}}</p>
+                            </td>
+                            <td>
+                                <p class="text-success">${{user.rate}}</p>
+                            </td>
+                            <td>
+                                <p class="text-success">${{user.rate*project.words_count}}</p>
+                            </td>
+                            <td class="text-right">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a href="#!/users/?id={{user.id}}" class="btn btn-sm btn-primary">More</a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-success dropdown-toggle" type="button" data-toggle="dropdown">Select
+                                                <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#!/projects/create" ng-click="setUserToProject(user.id, 0)">an interpreter</a></li>
+                                                <li><a href="#!/projects/create" ng-click="setUserToProject(user.id, 1)">a moderator</a></li>
+                                                <li><a href="#!/projects/create" ng-click="setUserToProject(user.id, 2)">moderator &amp; interpreter</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loading-procces">
+    <div class="inner">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <span class="sr-only">100% Complete</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css"> 
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  
+  <div ng-view></div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/interface.js"></script>
+
+  <!-- Angular libs -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
+
+  <!-- App libs -->
+  <script src="app.js"></script>
+  <script src="components/content-editable/ng-content-editable.min.js"></script>
+  <script src="authorization/authorization.js"></script>
+  <script src="general/general.js"></script>
+  <script src="team/team.js"></script>
+  <script src="projects/projects.js"></script>
+  <script src="users/users.js"></script>
+
+  <!-- App components -->
+  <script src="components/tablesort/angular-tablesort.js"></script>
+  <script src="components/common/common.js"></script>
+  <script src="components/common/common-factory.js"></script>
+  <script src="components/common/top-panel-directive.js"></script>
+  <script src="components/users/users.js"></script>
+  <script src="components/users/users-service.js"></script>
+  <script src="components/users/users-factory.js"></script>
+  <script src="components/projects/projects.js"></script>
+  <script src="components/projects/projects-service.js"></script>
+  <script src="components/projects/projects-factory.js"></script>  
+</body>
+</html>

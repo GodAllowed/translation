@@ -1,0 +1,61 @@
+<div data-ng-include src="'components/common/top-panel.html'"></div>
+<div data-ng-include src="'components/common/left-panel.html'"></div>
+
+<!-- content -->
+<div class="contentbar">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>Project language vars <button class="btn btn-success">Save changes</button></h1> 
+				</div>
+				<div class="alert alert-danger" ng-show="errors">
+					<p ng-repeat="error in errors">{{error}}</p>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">New language var</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-5">
+								<input ng-model="newVarName" type="text" class="form-control">
+							</div>
+							<div class="col-md-5">
+								<div class="textarea-replace form-control" id="newVarDesc" style="width:100%;" contenteditable="true"></div>
+							</div>
+							<div class="col-md-2">
+								<input ng-click="addNewVar()" type="submit" value="Add" class="btn btn-success" style="width: 100%;">
+							</div>
+						</div>
+					</div>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<th width="5%">ID</th>
+						<th width="40%">Name</th>
+						<th width="40%">Description</th>
+						<th></th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="projectVar in projectVars">
+							<td class="text-center">{{projectVar.id}}</td>
+							<td>
+								<input type="text" class="form-control" value="{{projectVar.name}}">
+							</td>
+							<td>
+								<div class="textarea-replace form-control" style="width:100%;" contenteditable="true">
+									{{projectVar.desciption}}
+								</div>
+							</td>
+							<td class="text-right">
+								<button class="btn btn-danger" ng-click="removeProjectVar(projectVar.id, $index)" style="width: 100%;">Remove</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="text-center">
+					<button class="btn btn-primary" ng-click="loadMore()">Load more</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,117 @@
+<div data-ng-include src="'components/common/top-panel.html'"></div>
+<div data-ng-include src="'components/common/left-panel.html'"></div>
+<!-- Content -->
+<br>
+<div class="contentbar">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- User about -->
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <center>
+                            <div class="userimage userimage-lg"><i class="glyphicon glyphicon-user"></i></div>
+                        </center>
+                        <br>
+                        <button class="btn btn-primary" ng-click="addToTeam(user.id)" ng-hide="success">Add to team</button>
+                        <div class="alert alert-success" ng-show="success">{{success}}</div>
+                        <div class="alert alert-danger" ng-show="errors">
+                            <p ng-repeat="error in errors">{{error}}</p>
+                        </div>
+                        <hr>
+                        <div class="text-left">
+                            <p class="text-muted">
+                                <strong>Native language:</strong> <br> English
+                            </p>
+                            <p class="text-muted">
+                                <strong>Language translation:</strong><br>
+                                <ul class="list-inline text-muted">
+                                    <li>English</li>
+                                    <li>Russian</li>
+                                </ul>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="col-md-8">
+                        <p class="lead">{{user.name}}</p>
+                        <div class="row">
+                            <div class="col-md-4"><strong>About me</strong></div>
+                            <div class="col-md-8">ssss</div>
+                        </div>
+                        <hr>
+                        <p class="lead">Prices</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Russian
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <span class="label label-success">$0.0005</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            Russian
+                                        </div>
+                                        <div class="col-md-4 text-right">
+                                            <span class="label label-success">$0.0005</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews -->
+            <div class="col-md-4">
+
+                <div class=" well rating-well">
+                    <div class="row vcenter">
+                        <div class="col-md-9">
+                            <strong>Rating</strong>
+                            <p class="text-muted">11 reviews</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                           <strong> {{user.rating}}</strong>
+                        </div>
+                    </div>
+
+                </div>
+                <div ng-show="user.reviews">
+                    <div class="panel panel-reviews" ng-repeat="review in user.reviews">
+                        <div class="panel-body">
+                            <div class="review-single">
+                                <div class="row">
+                                    <div class="col-md-4 text-center">
+                                        <div class="userimage userimage-xs"><i class="glyphicon glyphicon-user"></i></div>
+                                        <p class="text-muted"><small>{{review.author.name}}</small></p>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p class="text-muted">{{review.text}}</p>
+                                        <div class="text-left">
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star"></i>
+                                            <i class="glyphicon glyphicon-star-empty"></i>
+                                            <i class="glyphicon glyphicon-star-empty"></i>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">User haven't any reviews.</div>
+            </div>
+        </div>
+    </div>
+</div>

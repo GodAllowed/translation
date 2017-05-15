@@ -1,0 +1,51 @@
+<div data-ng-include src="'components/common/top-panel.html'"></div>
+<div data-ng-include src="'components/common/left-panel.html'"></div>
+
+<!-- Content -->
+<div class="contentbar">
+	<div class="container-fluid">
+		<div class="col-md-4 col-md-offset-4">
+			<br><br><br>
+			<div class="alert alert-danger" ng-show="errors">
+				<p ng-repeat="error in errors">{{error}}</p>
+			</div>
+			<div class="alert alert-success" ng-show="success">{{success}}</div>
+			<form ng-submit="changeProfileInfo()">
+				<fieldset>
+					<legend>Profile</legend>
+					<div class="form-group">
+						<label class="control-label">Name</label>
+						<input required="" ng-model="user.name" class="form-control" type="text">
+					</div>
+					<div class="form-group">
+						<label class="control-label">E-mail</label>
+						<input required="" ng-model="user.email" class="form-control" type="email">
+					</div>	
+					<div class="form-group">
+						<label class="control-label">Tel.</label>
+						<input class="form-control" ng-model="user.tel" type="tel">
+					</div>	
+					<div class="form-group">
+						<label class="control-label">Country</label>
+						<select class="form-control">
+							<option value="{{country.name}}" ng-repeat="country in countries">{{country.name}}</option>
+						</select>
+					</div>	
+					<div class="form-group">
+						<label class="control-label">Native language</label>
+						<select class="form-control">
+							<option value="{{lang.name}}" ng-repeat="lang in langs">{{lang.name}}</option>
+						</select>						
+					</div>	
+					<div class="form-group">
+						<label class="control-label">Bio</label>
+						<textarea class="form-control" cols="30" rows="10" placeholder="Few words about you..." ng-model="user.bio"></textarea>		
+					</div>		
+					<div class="form-group">
+						<input type="submit" class="btn btn-info" value="Save">
+					</div>											
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div> 

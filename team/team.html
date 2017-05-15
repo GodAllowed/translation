@@ -1,0 +1,68 @@
+<div data-ng-include src="'components/common/top-panel.html'"></div>
+<div data-ng-include src="'components/common/left-panel.html'"></div>
+<!-- Dashboard Content -->
+<div class="contentbar">
+	<div class="container-fluid">
+		<br><br>
+		<!-- Alert -->
+		<div class="row" ng-show="noMembers">
+			<div class="col-md-12">
+				<div class="alert alert-info">No members in your team. You can invite user to you team using <a href="#">this</a> form.</div>
+			</div>
+		</div>
+		<!-- search -->
+		<div class="row form-group" ng-hide="noMembers">
+			<div class="col-md-8">
+				<span class="search-input-i">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</span>
+				<input type="text" ng-model="searchName" class="search-input" placeholder="start typing name">
+			</div>
+			<div class="col-md-4">
+				<select class="form-control" ng-model="searchStatus">
+					<option value="">All</option>
+					<option value="1">Connected</option>
+					<option value="2">Request sended</option>
+				</select>
+			</div>
+		</div>
+		<!-- Users -->
+		<div class="row" ng-hide="noMembers">
+			<!-- users team -->
+			<div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="user in users | filter:{name : searchName, status: searchStatus}">
+				<div class="user-block-xs">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="userimage userimage-xs">
+								<i class="glyphicon glyphicon-user"></i>
+							</div>
+							<p class="user-block-name text-muted text-center">
+								{{user.name}}
+							</p>
+							<!--<span class="label label-success" ng-show="user.status == 1">Connected</span>
+							<span class="label label-info" ng-show="user.status == 0">Request sended</span>-->
+							<ul class="list-inline text-center">
+								<li ng-repeat="lang in user.langs"><span class="label label-info">{{lang.name}}</span></li>
+							</ul>
+
+							<ul class="list-inline text-center user-block-data" style="margin-bottom: 0;">
+								<li><i class="fa fa-comment" aria-hidden="true"></i> <strong>{{user.reviews_counter}}</strong> reviews</li>
+								<li>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<strong>{{user.rating}}</strong> 
+								</li>
+							</ul>
+						</div>
+						<div class="panel-footer text-center">
+							<div>
+								<a href="#!/users/?id={{user.id}}" class="btn btn-info btn-transparent">Details</a>
+								&nbsp;&nbsp;
+								<button class="btn btn-danger btn-transparent" ng-click="removeFromTeam(user.id, $index)">Remove</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
